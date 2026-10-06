@@ -124,7 +124,7 @@ final class service {
             $slots[$slot] = $candidate;
         }
 
-        if (!$slots) {
+        if (count($slots) < (int) $activity->minquestions) {
             throw new \moodle_exception('noquestionsavailable', 'masterypractice');
         }
 
