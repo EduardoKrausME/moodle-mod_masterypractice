@@ -374,3 +374,82 @@ function masterypractice_pluginfile(
     send_stored_file($file, 0, 0, $forcedownload, $options);
     return true;
 }
+
+/**
+ * Serves files belonging to questions inside a Mastery Practice QUBA.
+ *
+ * @param stdClass $course Course record.
+ * @param context $context Module context.
+ * @param string $component File component.
+ * @param string $filearea File area.
+ * @param int $qubaid Question usage id.
+ * @param int $slot Question slot.
+ * @param array $args Remaining path arguments.
+ * @param bool $forcedownload Force download.
+ * @param array $options Send-file options.
+ * @return bool
+ */
+function masterypractice_question_pluginfile(
+    stdClass $course,
+    context $context,
+    string $component,
+    string $filearea,
+    int $qubaid,
+    int $slot,
+    array $args,
+    bool $forcedownload,
+    array $options = []
+): bool {
+    global $CFG, $DB, $USER;
+
+    if ($context->contextlevel !== CONTEXT_MODULE) {
+        return false;
+    }
+
+    $cm = get_coursemodule_from_id('masterypractice', $context->instanceid, 0, false, MUST_EXIST);
+    require_login($course, true, $cm);
+
+    $session = $DB->get_record('masterypractice_sessions', [
+        'masterypracticeid' => $cm->instance,
+        'userid' => $USER->id,
+        'qubaid' => $qubaid,
+    ]);
+    if (!$session) {
+        return false;
+    }
+
+    require_once($CFG->dirroot . '/question/engine/lib.php');
+    $quba = question_engine::load_questions_usage_by_activity($qubaid);
+
+    $displayoptions = new question_display_options();
+    $visible = $session->state === 'completed'
+        ? question_display_options::VISIBLE
+        : question_display_options::HIDDEN;
+    $displayoptions->feedback = $visible;
+    $displayoptions->generalfeedback = $visible;
+    $displayoptions->rightanswer = $visible;
+    $displayoptions->correctness = $visible;
+    $displayoptions->marks = $visible;
+
+    if (!$quba->check_file_access(
+        $slot,
+        $displayoptions,
+        $component,
+        $filearea,
+        $args,
+        $forcedownload
+    )) {
+        return false;
+    }
+
+    $fs = get_file_storage();
+    $relativepath = implode('/', $args);
+    $fullpath = "/{$context->id}/{$component}/{$filearea}/{$relativepath}";
+    $file = $fs->get_file_by_hash(sha1($fullpath));
+    if (!$file || $file->is_directory()) {
+        return false;
+    }
+
+    send_stored_file($file, 0, 0, $forcedownload, $options);
+    return true;
+}
