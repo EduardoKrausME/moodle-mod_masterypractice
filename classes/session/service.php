@@ -22,12 +22,12 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\session;
+namespace mod_masterypractice\session;
 
-use mod_masterypractice\local\limits;
-use mod_masterypractice\local\mastery\state_manager;
-use mod_masterypractice\local\selection\question_selector;
-use mod_masterypractice\local\summary_manager;
+use mod_masterypractice\limits;
+use mod_masterypractice\mastery\state_manager;
+use mod_masterypractice\selection\question_selector;
+use mod_masterypractice\summary_manager;
 
 /**
  * Owns Practice Session lifecycle while delegating question execution to core.

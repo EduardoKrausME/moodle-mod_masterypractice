@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local;
+namespace mod_masterypractice;
 
 /**
  * Resolves activity limits against the site's current administrative caps.

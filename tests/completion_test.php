@@ -26,12 +26,12 @@ namespace mod_masterypractice;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_masterypractice\local\completion\evaluator;
+use mod_masterypractice\completion\evaluator;
 
 /**
  * Completion rules stay separate from decayed current mastery.
  *
- * @covers \mod_masterypractice\local\completion\evaluator
+ * @covers \mod_masterypractice\completion\evaluator
  */
 final class completion_test extends \advanced_testcase {
     /**

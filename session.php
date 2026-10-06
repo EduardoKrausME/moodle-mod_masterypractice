@@ -37,7 +37,7 @@ require_capability('mod/masterypractice:attempt', $context);
 
 if ($action === 'start') {
     require_sesskey();
-    $session = \mod_masterypractice\local\session\service::start($activity, $cm, $USER->id);
+    $session = \mod_masterypractice\session\service::start($activity, $cm, $USER->id);
     redirect(new moodle_url('/mod/masterypractice/session.php', [
         'id' => $cm->id,
         'session' => $session->id,
@@ -48,7 +48,7 @@ if (!$sessionid) {
     redirect(new moodle_url('/mod/masterypractice/view.php', ['id' => $cm->id]));
 }
 
-$session = \mod_masterypractice\local\session\service::get(
+$session = \mod_masterypractice\session\service::get(
     $sessionid,
     (int) $activity->id,
     (int) $USER->id
@@ -64,7 +64,7 @@ if ($session->state === 'completed') {
 if (data_submitted() && optional_param('finish', 0, PARAM_BOOL)) {
     require_sesskey();
     $responsetimes = optional_param_array('masterytime', [], PARAM_INT);
-    \mod_masterypractice\local\session\service::finish(
+    \mod_masterypractice\session\service::finish(
         $activity,
         $cm,
         (int) $session->id,

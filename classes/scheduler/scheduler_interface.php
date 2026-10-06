@@ -15,34 +15,30 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * review_result.php
+ * scheduler_interface.php
  *
  * @package   mod_masterypractice
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\scheduler;
+namespace mod_masterypractice\scheduler;
 
 /**
- * Class review_result.
+ * Interface scheduler_interface.
  */
-final class review_result {
+interface scheduler_interface {
     /**
-     * Method __construct.
+     * Method key.
      *
-     * @param int $nextreview Parameter nextreview.
-     * @param int $interval Parameter interval.
-     * @param float $masterydelta Parameter masterydelta.
-     * @param float $confidencedelta Parameter confidencedelta.
-     * @param array $itemfields Parameter itemfields.
+     * @return string Return value.
      */
-    public function __construct(
-        public readonly int $nextreview,
-        public readonly int $interval,
-        public readonly float $masterydelta,
-        public readonly float $confidencedelta,
-        public readonly array $itemfields = [],
-    ) {
-    }
+    public function key(): string;
+    /**
+     * Method review.
+     *
+     * @param review_input $input Parameter input.
+     * @return review_result Return value.
+     */
+    public function review(review_input $input): review_result;
 }

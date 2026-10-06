@@ -22,11 +22,11 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\selection;
+namespace mod_masterypractice\selection;
 
-use mod_masterypractice\local\concept_repository;
-use mod_masterypractice\local\limits;
-use mod_masterypractice\local\question_repository;
+use mod_masterypractice\concept_repository;
+use mod_masterypractice\limits;
+use mod_masterypractice\question_repository;
 
 /**
  * Adaptive question selector.

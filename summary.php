@@ -34,7 +34,7 @@ require_login($course, true, $cm);
 $context = context_module::instance($cm->id);
 require_capability('mod/masterypractice:attempt', $context);
 
-$session = \mod_masterypractice\local\session\service::get(
+$session = \mod_masterypractice\session\service::get(
     $sessionid,
     (int) $activity->id,
     (int) $USER->id
@@ -51,7 +51,7 @@ $PAGE->set_title(get_string('sessioncompleted', 'masterypractice'));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
-$labels = \mod_masterypractice\local\concept_repository::labels((int) $activity->id);
+$labels = \mod_masterypractice\concept_repository::labels((int) $activity->id);
 $history = $DB->get_records('masterypractice_history', ['sessionid' => $session->id], 'id ASC');
 $strengthened = [];
 $needsreview = [];

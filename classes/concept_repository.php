@@ -22,7 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local;
+namespace mod_masterypractice;
 
 use core_question\local\bank\question_version_status;
 

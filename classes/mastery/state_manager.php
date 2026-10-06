@@ -22,12 +22,12 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\mastery;
+namespace mod_masterypractice\mastery;
 
-use mod_masterypractice\local\concept_repository;
-use mod_masterypractice\local\limits;
-use mod_masterypractice\local\scheduler\factory;
-use mod_masterypractice\local\scheduler\review_input;
+use mod_masterypractice\concept_repository;
+use mod_masterypractice\limits;
+use mod_masterypractice\scheduler\factory;
+use mod_masterypractice\scheduler\review_input;
 
 /**
  * Applies Question Engine evidence to persisted question and concept state.
@@ -281,7 +281,7 @@ final class state_manager {
      * @param \stdClass $state State.
      * @param \stdClass $sessionquestion Session question.
      * @param float $fraction Fraction.
-     * @param \mod_masterypractice\local\scheduler\review_result $result Strategy result.
+     * @param \mod_masterypractice\scheduler\review_result $result Strategy result.
      * @param int $now Timestamp.
      * @return void
      */
@@ -289,7 +289,7 @@ final class state_manager {
         \stdClass $state,
         \stdClass $sessionquestion,
         float $fraction,
-        \mod_masterypractice\local\scheduler\review_result $result,
+        \mod_masterypractice\scheduler\review_result $result,
         int $now
     ): void {
         global $DB;

@@ -156,7 +156,7 @@ class restore_masterypractice_activity_structure_step extends restore_activity_s
         global $CFG;
 
         require_once($CFG->dirroot . '/mod/masterypractice/classes/local/concept_repository.php');
-        return \mod_masterypractice\local\concept_repository::source_is_available(
+        return \mod_masterypractice\concept_repository::source_is_available(
             $this->get_courseid(),
             $type,
             $sourceid

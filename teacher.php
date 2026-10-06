@@ -39,7 +39,7 @@ $PAGE->set_title(get_string('teacherdashboard', 'masterypractice'));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
-$concepts = \mod_masterypractice\local\concept_repository::get_all((int) $activity->id);
+$concepts = \mod_masterypractice\concept_repository::get_all((int) $activity->id);
 $conceptmap = [];
 foreach ($concepts as $concept) {
     $conceptmap[$concept->id] = $concept;
@@ -51,7 +51,7 @@ $summaries = $DB->get_records(
     'avgmastery ASC'
 );
 if (!$summaries && $DB->record_exists('masterypractice_cstate', ['masterypracticeid' => $activity->id])) {
-    \mod_masterypractice\local\class_summary_manager::rebuild_activity((int) $activity->id);
+    \mod_masterypractice\class_summary_manager::rebuild_activity((int) $activity->id);
     $summaries = $DB->get_records(
         'masterypractice_csummary',
         ['masterypracticeid' => $activity->id],
@@ -68,7 +68,7 @@ foreach ($summaries as $summary) {
     $concept = $conceptmap[$summary->conceptid];
     $lastupdate = max($lastupdate, (int) $summary->timemodified);
     $summarydata[] = [
-        'label' => \mod_masterypractice\local\concept_repository::label($concept),
+        'label' => \mod_masterypractice\concept_repository::label($concept),
         'critical' => !empty($concept->critical),
         'mastery' => round((float) $summary->avgmastery),
         'confidence' => round((float) $summary->avgconfidence),
@@ -87,7 +87,7 @@ $detaillabel = '';
 if ($conceptid) {
     $concept = $conceptmap[$conceptid] ?? null;
     if ($concept) {
-        $detaillabel = \mod_masterypractice\local\concept_repository::label($concept);
+        $detaillabel = \mod_masterypractice\concept_repository::label($concept);
         $sql = "SELECT cs.*, u.firstname, u.lastname, u.firstnamephonetic, u.lastnamephonetic,
                        u.middlename, u.alternatename
                   FROM {masterypractice_cstate} cs

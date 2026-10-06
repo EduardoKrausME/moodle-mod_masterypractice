@@ -26,12 +26,12 @@ namespace mod_masterypractice;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_masterypractice\local\selection\question_selector;
+use mod_masterypractice\selection\question_selector;
 
 /**
  * Pure selection-priority tests.
  *
- * @covers \mod_masterypractice\local\selection\question_selector
+ * @covers \mod_masterypractice\selection\question_selector
  */
 final class selection_test extends \advanced_testcase {
     /**

@@ -22,9 +22,9 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local;
+namespace mod_masterypractice;
 
-use mod_masterypractice\local\mastery\difficulty_estimator;
+use mod_masterypractice\mastery\difficulty_estimator;
 
 /**
  * Centralised deletion of learner-derived data and Question Engine usages.

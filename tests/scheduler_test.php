@@ -26,19 +26,19 @@ namespace mod_masterypractice;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_masterypractice\local\scheduler\adaptive_mastery_scheduler;
-use mod_masterypractice\local\scheduler\factory;
-use mod_masterypractice\local\scheduler\leitner_scheduler;
-use mod_masterypractice\local\scheduler\review_input;
-use mod_masterypractice\local\scheduler\sm2_scheduler;
+use mod_masterypractice\scheduler\adaptive_mastery_scheduler;
+use mod_masterypractice\scheduler\factory;
+use mod_masterypractice\scheduler\leitner_scheduler;
+use mod_masterypractice\scheduler\review_input;
+use mod_masterypractice\scheduler\sm2_scheduler;
 
 /**
  * Deterministic tests for all scheduling strategies.
  *
- * @covers \mod_masterypractice\local\scheduler\leitner_scheduler
- * @covers \mod_masterypractice\local\scheduler\sm2_scheduler
- * @covers \mod_masterypractice\local\scheduler\adaptive_mastery_scheduler
- * @covers \mod_masterypractice\local\scheduler\factory
+ * @covers \mod_masterypractice\scheduler\leitner_scheduler
+ * @covers \mod_masterypractice\scheduler\sm2_scheduler
+ * @covers \mod_masterypractice\scheduler\adaptive_mastery_scheduler
+ * @covers \mod_masterypractice\scheduler\factory
  */
 final class scheduler_test extends \advanced_testcase {
     /**

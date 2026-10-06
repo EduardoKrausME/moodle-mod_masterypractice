@@ -24,7 +24,7 @@
 
 namespace mod_masterypractice\task;
 
-use mod_masterypractice\local\class_summary_manager;
+use mod_masterypractice\class_summary_manager;
 
 /**
  * Class rebuild_summaries.

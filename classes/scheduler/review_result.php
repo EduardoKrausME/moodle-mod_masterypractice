@@ -15,34 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * difficulty_estimator.php
+ * review_result.php
  *
  * @package   mod_masterypractice
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\mastery;
+namespace mod_masterypractice\scheduler;
 
 /**
- * Class difficulty_estimator.
+ * Class review_result.
  */
-final class difficulty_estimator {
+final class review_result {
     /**
-     * Method estimate.
+     * Method __construct.
      *
-     * @param int $attempts Parameter attempts.
-     * @param float $totalfraction Parameter totalfraction.
-     * @param int $minimumsample Parameter minimumsample.
-     * @return float Return value.
+     * @param int $nextreview Parameter nextreview.
+     * @param int $interval Parameter interval.
+     * @param float $masterydelta Parameter masterydelta.
+     * @param float $confidencedelta Parameter confidencedelta.
+     * @param array $itemfields Parameter itemfields.
      */
-    public static function estimate(int $attempts, float $totalfraction, int $minimumsample): float {
-        $minimumsample = max(1, $minimumsample);
-        if ($attempts < $minimumsample) {
-            return 0.5;
-        }
-        $priorstrength = (float) $minimumsample;
-        $posterioraccuracy = ($totalfraction + 0.5 * $priorstrength) / ($attempts + $priorstrength);
-        return max(0.05, min(0.95, 1.0 - $posterioraccuracy));
+    public function __construct(
+        public readonly int $nextreview,
+        public readonly int $interval,
+        public readonly float $masterydelta,
+        public readonly float $confidencedelta,
+        public readonly array $itemfields = [],
+    ) {
     }
 }

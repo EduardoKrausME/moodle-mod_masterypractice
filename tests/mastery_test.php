@@ -26,14 +26,14 @@ namespace mod_masterypractice;
 
 defined('MOODLE_INTERNAL') || die();
 
-use mod_masterypractice\local\mastery\decay;
-use mod_masterypractice\local\mastery\difficulty_estimator;
+use mod_masterypractice\mastery\decay;
+use mod_masterypractice\mastery\difficulty_estimator;
 
 /**
  * Tests for current-mastery decay and aggregate item difficulty.
  *
- * @covers \mod_masterypractice\local\mastery\decay
- * @covers \mod_masterypractice\local\mastery\difficulty_estimator
+ * @covers \mod_masterypractice\mastery\decay
+ * @covers \mod_masterypractice\mastery\difficulty_estimator
  */
 final class mastery_test extends \advanced_testcase {
     /**

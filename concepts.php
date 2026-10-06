@@ -44,7 +44,7 @@ if ($deleteid) {
     $concept = $DB->get_record('masterypractice_concepts', [
         'id' => $deleteid, 'masterypracticeid' => $activity->id,
     ], '*', MUST_EXIST);
-    \mod_masterypractice\local\data_manager::delete_concept_data((int) $concept->id);
+    \mod_masterypractice\data_manager::delete_concept_data((int) $concept->id);
     $DB->delete_records('masterypractice_concepts', ['id' => $concept->id]);
     $DB->delete_records('masterypractice_usummary', ['masterypracticeid' => $activity->id]);
     redirect(new moodle_url('/mod/masterypractice/concepts.php', ['id' => $cm->id]));
@@ -97,7 +97,7 @@ if ($form->is_cancelled()) {
         $record->timemodified = $now;
         $DB->update_record('masterypractice_concepts', $record);
         if ($sourcechanged) {
-            \mod_masterypractice\local\data_manager::delete_concept_data((int) $record->id);
+            \mod_masterypractice\data_manager::delete_concept_data((int) $record->id);
         }
     } else {
         $sortorder = (int) $DB->get_field_sql(
@@ -124,7 +124,7 @@ if ($form->is_cancelled()) {
 echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('manageconcepts', 'masterypractice'));
 
-$concepts = \mod_masterypractice\local\concept_repository::get_all((int) $activity->id);
+$concepts = \mod_masterypractice\concept_repository::get_all((int) $activity->id);
 if ($concepts) {
     $table = new html_table();
     $table->head = [
@@ -136,7 +136,7 @@ if ($concepts) {
     ];
     foreach ($concepts as $concept) {
         $table->data[] = [
-            \mod_masterypractice\local\concept_repository::label($concept),
+            \mod_masterypractice\concept_repository::label($concept),
             get_string('concepttype_' . $concept->sourcetype, 'masterypractice'),
             format_float((float) $concept->weight, 2),
             $concept->critical ? get_string('yes') : get_string('no'),

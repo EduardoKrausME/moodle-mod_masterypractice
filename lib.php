@@ -98,7 +98,7 @@ function masterypractice_delete_instance(int $id): bool {
         return false;
     }
 
-    \mod_masterypractice\local\data_manager::delete_activity_data($id);
+    \mod_masterypractice\data_manager::delete_activity_data($id);
     $DB->delete_records('masterypractice_csummary', ['masterypracticeid' => $id]);
     $DB->delete_records('masterypractice_qstats', ['masterypracticeid' => $id]);
     $DB->delete_records('masterypractice_concepts', ['masterypracticeid' => $id]);
@@ -171,7 +171,7 @@ function masterypractice_get_completion_state($course, $cm, int $userid, bool $t
     global $DB;
 
     $activity = $DB->get_record('masterypractice', ['id' => $cm->instance], '*', MUST_EXIST);
-    return \mod_masterypractice\local\completion\evaluator::evaluate_user($activity, $userid, $type);
+    return \mod_masterypractice\completion\evaluator::evaluate_user($activity, $userid, $type);
 }
 
 /**
@@ -337,7 +337,7 @@ function masterypractice_reset_userdata(stdClass $data): array {
 
     $instances = $DB->get_records('masterypractice', ['course' => $data->courseid], '', 'id');
     foreach ($instances as $instance) {
-        \mod_masterypractice\local\data_manager::delete_activity_data((int) $instance->id);
+        \mod_masterypractice\data_manager::delete_activity_data((int) $instance->id);
     }
 
     return [[

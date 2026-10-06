@@ -97,7 +97,8 @@ class mod_masterypractice_mod_form extends moodleform_mod {
         $mform->addElement('static', 'conceptsinfo', '', get_string('conceptsconfiguredafter', 'masterypractice'));
         if (!empty($this->_cm) && !empty($this->_cm->id)) {
             $url = new moodle_url('/mod/masterypractice/concepts.php', ['id' => $this->_cm->id]);
-            $mform->addElement('static', 'conceptslink', '', html_writer::link($url, get_string('manageconcepts', 'masterypractice')));
+            $mform->addElement('static', 'conceptslink', '',
+                html_writer::link($url, get_string('manageconcepts', 'masterypractice')));
         }
 
         $mform->addElement('header', 'gradeheader', get_string('gradeheader', 'masterypractice'));

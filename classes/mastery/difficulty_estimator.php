@@ -15,30 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * scheduler_interface.php
+ * difficulty_estimator.php
  *
  * @package   mod_masterypractice
  * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace mod_masterypractice\local\scheduler;
+namespace mod_masterypractice\mastery;
 
 /**
- * Interface scheduler_interface.
+ * Class difficulty_estimator.
  */
-interface scheduler_interface {
+final class difficulty_estimator {
     /**
-     * Method key.
+     * Method estimate.
      *
-     * @return string Return value.
+     * @param int $attempts Parameter attempts.
+     * @param float $totalfraction Parameter totalfraction.
+     * @param int $minimumsample Parameter minimumsample.
+     * @return float Return value.
      */
-    public function key(): string;
-    /**
-     * Method review.
-     *
-     * @param review_input $input Parameter input.
-     * @return review_result Return value.
-     */
-    public function review(review_input $input): review_result;
+    public static function estimate(int $attempts, float $totalfraction, int $minimumsample): float {
+        $minimumsample = max(1, $minimumsample);
+        if ($attempts < $minimumsample) {
+            return 0.5;
+        }
+        $priorstrength = (float) $minimumsample;
+        $posterioraccuracy = ($totalfraction + 0.5 * $priorstrength) / ($attempts + $priorstrength);
+        return max(0.05, min(0.95, 1.0 - $posterioraccuracy));
+    }
 }

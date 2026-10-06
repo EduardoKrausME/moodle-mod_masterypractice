@@ -66,7 +66,7 @@ if ($actions) {
 }
 
 if (has_capability('mod/masterypractice:attempt', $context)) {
-    $concepts = \mod_masterypractice\local\concept_repository::get_all((int) $activity->id);
+    $concepts = \mod_masterypractice\concept_repository::get_all((int) $activity->id);
     $states = $DB->get_records('masterypractice_cstate', [
         'masterypracticeid' => $activity->id,
         'userid' => $USER->id,
@@ -81,7 +81,7 @@ if (has_capability('mod/masterypractice:attempt', $context)) {
         'userid' => $USER->id,
     ]);
     if (!$summary && $concepts) {
-        $summary = \mod_masterypractice\local\summary_manager::refresh_user($activity, $USER->id, time());
+        $summary = \mod_masterypractice\summary_manager::refresh_user($activity, $USER->id, time());
     }
 
     $now = time();
@@ -91,13 +91,13 @@ if (has_capability('mod/masterypractice:attempt', $context)) {
         $mastery = $state ? (float) $state->mastery : 0.0;
         $confidence = $state ? (float) $state->confidence : 0.0;
         $lastreview = $state ? (int) $state->lastreview : 0;
-        $currentmastery = \mod_masterypractice\local\mastery\decay::estimate(
+        $currentmastery = \mod_masterypractice\mastery\decay::estimate(
             $mastery,
             $lastreview,
             $now,
             (int) $activity->decayhalflifedays
         );
-        $currentconfidence = \mod_masterypractice\local\mastery\decay::estimate_confidence(
+        $currentconfidence = \mod_masterypractice\mastery\decay::estimate_confidence(
             $confidence,
             $lastreview,
             $now,
@@ -122,7 +122,7 @@ if (has_capability('mod/masterypractice:attempt', $context)) {
         }
 
         $conceptdata[] = [
-            'label' => \mod_masterypractice\local\concept_repository::label($concept),
+            'label' => \mod_masterypractice\concept_repository::label($concept),
             'critical' => !empty($concept->critical),
             'currentmastery' => round($currentmastery),
             'currentconfidence' => round($currentconfidence),
@@ -150,7 +150,7 @@ if (has_capability('mod/masterypractice:attempt', $context)) {
         0,
         40
     );
-    $labels = \mod_masterypractice\local\concept_repository::labels((int) $activity->id);
+    $labels = \mod_masterypractice\concept_repository::labels((int) $activity->id);
     $history = [];
     foreach (array_reverse(array_values($historyrecords)) as $record) {
         $history[] = [

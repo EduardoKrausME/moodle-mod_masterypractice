@@ -31,7 +31,7 @@ use core_privacy\local\request\contextlist;
 use core_privacy\local\request\helper;
 use core_privacy\local\request\userlist;
 use core_privacy\local\request\writer;
-use mod_masterypractice\local\data_manager;
+use mod_masterypractice\data_manager;
 
 /**
  * Privacy API provider for Mastery Practice.
