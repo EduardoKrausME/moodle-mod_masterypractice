@@ -1,0 +1,29 @@
+<div class="masterypractice-summary">
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <h2>{{#str}}sessioncompleted, masterypractice{{/str}}</h2>
+            <div class="masterypractice-score">{{correctcount}} / {{questioncount}}</div>
+            <div class="text-muted">{{#str}}score, masterypractice{{/str}}: {{score}}%</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h4>{{#str}}strengthened, masterypractice{{/str}}</h4>
+                {{#strengthened}}<div class="mb-2">✓ {{label}} <span class="text-muted">{{mastery}}%</span></div>{{/strengthened}}
+                {{^strengthened}}<div class="text-muted">—</div>{{/strengthened}}
+            </div></div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card h-100"><div class="card-body">
+                <h4>{{#str}}needsreview, masterypractice{{/str}}</h4>
+                {{#needsreview}}<div class="mb-2">→ {{label}} <span class="text-muted">{{mastery}}%</span></div>{{/needsreview}}
+                {{^needsreview}}<div class="text-muted">—</div>{{/needsreview}}
+            </div></div>
+        </div>
+    </div>
+    <div class="alert alert-secondary">
+        <strong>{{#str}}recommendednext, masterypractice{{/str}}:</strong> {{recommendednext}}
+    </div>
+    <a class="btn btn-primary" href="{{backurl}}">{{#str}}backtoactivity, masterypractice{{/str}}</a>
+</div>

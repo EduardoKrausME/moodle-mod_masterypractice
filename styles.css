@@ -1,0 +1,16 @@
+.masterypractice-percent {
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1;
+}
+.masterypractice-score {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+.masterypractice-concept-card .progress {
+    height: .5rem;
+}
+.masterypractice-session .que {
+    margin-bottom: 1.5rem;
+}

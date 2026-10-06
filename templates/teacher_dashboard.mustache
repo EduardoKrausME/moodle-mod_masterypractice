@@ -1,0 +1,64 @@
+<div class="masterypractice-teacher-dashboard">
+    <h3>{{#str}}classmastery, masterypractice{{/str}}</h3>
+    {{#lastupdate}}<div class="small text-muted mb-3">{{#str}}lastsummaryupdate, masterypractice, {{lastupdate}}{{/str}}</div>{{/lastupdate}}
+    {{^hassummaries}}<div class="alert alert-info">{{#str}}summarynotready, masterypractice{{/str}}</div>{{/hassummaries}}
+    {{#hassummaries}}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>{{#str}}conceptsource, masterypractice{{/str}}</th>
+                    <th>{{#str}}currentmastery, masterypractice{{/str}}</th>
+                    <th>{{#str}}confidence, masterypractice{{/str}}</th>
+                    <th>{{#str}}usercount, masterypractice{{/str}}</th>
+                    <th>{{#str}}overduecount, masterypractice{{/str}}</th>
+                    <th>{{#str}}lowcount, masterypractice{{/str}}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#summaries}}
+                <tr>
+                    <td><strong>{{label}}</strong>{{#critical}} <span class="badge badge-warning">{{#str}}criticalconcept, masterypractice{{/str}}</span>{{/critical}}</td>
+                    <td>{{mastery}}%</td>
+                    <td>{{confidence}}%</td>
+                    <td>{{usercount}}</td>
+                    <td>{{overduecount}}</td>
+                    <td>{{lowcount}}</td>
+                    <td><a href="{{detailsurl}}">{{#str}}viewdetails, masterypractice{{/str}}</a></td>
+                </tr>
+            {{/summaries}}
+            </tbody>
+        </table>
+    </div>
+    {{/hassummaries}}
+
+    {{#hasdetail}}
+    <h3 class="mt-5">{{#str}}conceptdetails, masterypractice{{/str}}: {{detaillabel}}</h3>
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead><tr><th>{{#str}}user{{/str}}</th><th>{{#str}}persistedmastery, masterypractice{{/str}}</th><th>{{#str}}confidence, masterypractice{{/str}}</th><th>{{#str}}nextreview, masterypractice{{/str}}</th></tr></thead>
+            <tbody>
+            {{#detail}}
+                <tr><td>{{fullname}}</td><td>{{mastery}}%</td><td>{{confidence}}%</td><td>{{nextreview}}</td></tr>
+            {{/detail}}
+            </tbody>
+        </table>
+    </div>
+    {{/hasdetail}}
+
+    <h3 class="mt-5">{{#str}}learnersattention, masterypractice{{/str}}</h3>
+    <p class="text-muted">{{#str}}indicatornote, masterypractice{{/str}}</p>
+    {{#hasattention}}
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead><tr><th>{{#str}}user{{/str}}</th><th>{{#str}}persistedmastery, masterypractice{{/str}}</th><th>{{#str}}indicatorstitle, masterypractice{{/str}}</th></tr></thead>
+            <tbody>
+            {{#attention}}
+                <tr><td>{{fullname}}</td><td>{{mastery}}%</td><td>{{indicators}}</td></tr>
+            {{/attention}}
+            </tbody>
+        </table>
+    </div>
+    {{/hasattention}}
+</div>

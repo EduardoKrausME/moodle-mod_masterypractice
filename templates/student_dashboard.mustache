@@ -1,0 +1,67 @@
+<div class="masterypractice-dashboard">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        <div>
+            <h3 class="mb-1">{{#str}}todaypractice, masterypractice{{/str}}</h3>
+            <div class="text-muted">
+                {{#questioncount}}{{#str}}questioncount, masterypractice, {{questioncount}}{{/str}}{{/questioncount}}
+                {{#estimatedminutes}} · {{#str}}estimatedtime, masterypractice, {{estimatedminutes}}{{/str}}{{/estimatedminutes}}
+            </div>
+        </div>
+        <div class="mt-2 mt-md-0">
+            {{#inprogressurl}}
+                <a class="btn btn-primary" href="{{inprogressurl}}">{{#str}}continuesession, masterypractice{{/str}}</a>
+            {{/inprogressurl}}
+            {{^inprogressurl}}
+                <a class="btn btn-primary" href="{{starturl}}">{{#str}}startpractice, masterypractice{{/str}}</a>
+            {{/inprogressurl}}
+        </div>
+    </div>
+
+    <h3>{{#str}}domainmap, masterypractice{{/str}}</h3>
+    <div class="row">
+        {{#concepts}}
+        <div class="col-md-6 col-xl-4 mb-3">
+            <div class="card h-100 masterypractice-concept-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <strong>{{label}}</strong>
+                        {{#critical}}<span class="badge badge-warning">{{#str}}criticalconcept, masterypractice{{/str}}</span>{{/critical}}
+                    </div>
+                    <div class="d-flex justify-content-between align-items-end mt-3">
+                        <div class="masterypractice-percent">{{currentmastery}}%</div>
+                        <span class="badge {{badgeclass}}">{{statelabel}}</span>
+                    </div>
+                    <div class="progress mt-2" aria-label="{{label}}">
+                        <div class="progress-bar" role="progressbar" style="width: {{currentmastery}}%" aria-valuenow="{{currentmastery}}" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="small text-muted mt-2">
+                        {{#str}}confidence, masterypractice{{/str}}: {{currentconfidence}}%
+                        {{#nextreview}} · {{#str}}nextreview, masterypractice{{/str}}: {{nextreview}}{{/nextreview}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/concepts}}
+        {{^concepts}}
+        <div class="col-12"><div class="alert alert-info">{{#str}}noconcepts, masterypractice{{/str}}</div></div>
+        {{/concepts}}
+    </div>
+
+    {{#haschart}}
+    <div class="mt-4">{{{charthtml}}}</div>
+    {{/haschart}}
+
+    {{#hashistory}}
+    <h3 class="mt-4">{{#str}}evolution, masterypractice{{/str}}</h3>
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead><tr><th>{{#str}}conceptsource, masterypractice{{/str}}</th><th>{{#str}}persistedmastery, masterypractice{{/str}}</th><th>{{#str}}confidence, masterypractice{{/str}}</th><th>{{#str}}date{{/str}}</th></tr></thead>
+            <tbody>
+            {{#history}}
+                <tr><td>{{label}}</td><td>{{mastery}}%</td><td>{{confidence}}%</td><td>{{date}}</td></tr>
+            {{/history}}
+            </tbody>
+        </table>
+    </div>
+    {{/hashistory}}
+</div>
