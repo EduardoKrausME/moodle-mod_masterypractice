@@ -103,15 +103,20 @@ final class data_manager {
 
         $DB->delete_records('masterypractice_qstats', ['masterypracticeid' => $activityid]);
 
-        $sql = "SELECT sq.entryid,
-                       COUNT(sq.id) AS attempts,
+        $sql = "SELECT firstseen.entryid,
+                       COUNT(firstseen.userid) AS attempts,
                        SUM(sq.fraction) AS totalfraction
-                  FROM {masterypractice_squestions} sq
-                  JOIN {masterypractice_sessions} s ON s.id = sq.sessionid
-                 WHERE s.masterypracticeid = :activityid
-                   AND s.state = :state
-                   AND sq.fraction IS NOT NULL
-              GROUP BY sq.entryid";
+                  FROM (
+                        SELECT sq0.entryid, s0.userid, MIN(sq0.id) AS firstquestionid
+                          FROM {masterypractice_squestions} sq0
+                          JOIN {masterypractice_sessions} s0 ON s0.id = sq0.sessionid
+                         WHERE s0.masterypracticeid = :activityid
+                           AND s0.state = :state
+                           AND sq0.fraction IS NOT NULL
+                      GROUP BY sq0.entryid, s0.userid
+                  ) firstseen
+                  JOIN {masterypractice_squestions} sq ON sq.id = firstseen.firstquestionid
+              GROUP BY firstseen.entryid";
         $records = $DB->get_records_sql($sql, [
             'activityid' => $activityid,
             'state' => 'completed',
