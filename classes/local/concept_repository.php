@@ -1,19 +1,62 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * concept_repository.php
+ *
+ * @package   mod_masterypractice
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_masterypractice\local;
 
 defined('MOODLE_INTERNAL') || die();
 
 use core_question\local\bank\question_version_status;
 
+/**
+ * Class concept_repository.
+ */
 final class concept_repository {
+    /**
+     * Property descendantcache.
+     *
+     * @var array
+     */
     private static array $descendantcache = [];
 
+    /**
+     * Method get_all.
+     *
+     * @param int $activityid Parameter activityid.
+     * @return array Return value.
+     */
     public static function get_all(int $activityid): array {
         global $DB;
         return array_values($DB->get_records('masterypractice_concepts',
             ['masterypracticeid' => $activityid], 'sortorder ASC, id ASC'));
     }
 
+    /**
+     * Method label.
+     *
+     * @param \stdClass $concept Parameter concept.
+     * @return string Return value.
+     */
     public static function label(\stdClass $concept): string {
         global $DB;
         if ($concept->sourcetype === 'category') {
@@ -25,6 +68,12 @@ final class concept_repository {
         return '#' . $concept->sourceid;
     }
 
+    /**
+     * Method labels.
+     *
+     * @param int $activityid Parameter activityid.
+     * @return array Return value.
+     */
     public static function labels(int $activityid): array {
         $labels = [];
         foreach (self::get_all($activityid) as $concept) {
@@ -33,6 +82,12 @@ final class concept_repository {
         return $labels;
     }
 
+    /**
+     * Method course_context_ids.
+     *
+     * @param int $courseid Parameter courseid.
+     * @return array Return value.
+     */
     public static function course_context_ids(int $courseid): array {
         global $DB;
         $coursecontext = \context_course::instance($courseid);
@@ -44,6 +99,12 @@ final class concept_repository {
         return array_map('intval', array_keys($records));
     }
 
+    /**
+     * Method category_options.
+     *
+     * @param int $courseid Parameter courseid.
+     * @return array Return value.
+     */
     public static function category_options(int $courseid): array {
         global $DB;
         $contextids = self::course_context_ids($courseid);
@@ -65,6 +126,12 @@ final class concept_repository {
         return $options;
     }
 
+    /**
+     * Method tag_options.
+     *
+     * @param int $courseid Parameter courseid.
+     * @return array Return value.
+     */
     public static function tag_options(int $courseid): array {
         global $DB;
         $contextids = self::course_context_ids($courseid);
@@ -95,11 +162,25 @@ final class concept_repository {
         return $options;
     }
 
+    /**
+     * Method source_is_available.
+     *
+     * @param int $courseid Parameter courseid.
+     * @param string $type Parameter type.
+     * @param int $sourceid Parameter sourceid.
+     * @return bool Return value.
+     */
     public static function source_is_available(int $courseid, string $type, int $sourceid): bool {
         $options = $type === 'category' ? self::category_options($courseid) : self::tag_options($courseid);
         return array_key_exists($sourceid, $options);
     }
 
+    /**
+     * Method category_ids.
+     *
+     * @param \stdClass $concept Parameter concept.
+     * @return array Return value.
+     */
     public static function category_ids(\stdClass $concept): array {
         global $DB;
         $root = (int) $concept->sourceid;
@@ -127,6 +208,13 @@ final class concept_repository {
         return self::$descendantcache[$root] = $ids;
     }
 
+    /**
+     * Method matching_concepts.
+     *
+     * @param int $activityid Parameter activityid.
+     * @param int $questionid Parameter questionid.
+     * @return array Return value.
+     */
     public static function matching_concepts(int $activityid, int $questionid): array {
         global $DB;
         $question = $DB->get_record_sql(

@@ -1,9 +1,40 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * mod_form.php
+ *
+ * @package   mod_masterypractice
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->dirroot . '/course/moodleform_mod.php');
 
+/**
+ * Class mod_masterypractice_mod_form.
+ */
 class mod_masterypractice_mod_form extends moodleform_mod {
+    /**
+     * Method definition.
+     *
+     * @return void Return value.
+     */
     public function definition(): void {
         $mform = $this->_form;
 
@@ -93,6 +124,11 @@ class mod_masterypractice_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
+    /**
+     * Method add_completion_rules.
+     *
+     * @return array Return value.
+     */
     public function add_completion_rules(): array {
         $mform = $this->_form;
         $suffix = $this->get_suffix();
@@ -125,6 +161,12 @@ class mod_masterypractice_mod_form extends moodleform_mod {
         return $groups;
     }
 
+    /**
+     * Method completion_rule_enabled.
+     *
+     * @param mixed $data Parameter data.
+     * @return bool Return value.
+     */
     public function completion_rule_enabled($data): bool {
         $suffix = $this->get_suffix();
         foreach (['completionsessions', 'completionquestions', 'completionmastery'] as $field) {
@@ -135,6 +177,12 @@ class mod_masterypractice_mod_form extends moodleform_mod {
         return !empty($data['completioncritical' . $suffix]);
     }
 
+    /**
+     * Method data_postprocessing.
+     *
+     * @param mixed $data Parameter data.
+     * @return void Return value.
+     */
     public function data_postprocessing($data): void {
         parent::data_postprocessing($data);
 
@@ -160,6 +208,13 @@ class mod_masterypractice_mod_form extends moodleform_mod {
         }
     }
 
+    /**
+     * Method validation.
+     *
+     * @param mixed $data Parameter data.
+     * @param mixed $files Parameter files.
+     * @return array Return value.
+     */
     public function validation($data, $files): array {
         $errors = parent::validation($data, $files);
 

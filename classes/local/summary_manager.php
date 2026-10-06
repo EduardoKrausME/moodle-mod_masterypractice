@@ -1,8 +1,42 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * summary_manager.php
+ *
+ * @package   mod_masterypractice
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_masterypractice\local;
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Class summary_manager.
+ */
 final class summary_manager {
+    /**
+     * Method refresh_user.
+     *
+     * @param \stdClass $activity Parameter activity.
+     * @param int $userid Parameter userid.
+     * @param int $now Parameter now.
+     * @return \stdClass Return value.
+     */
     public static function refresh_user(\stdClass $activity, int $userid, int $now): \stdClass {
         global $DB;
 
@@ -76,6 +110,16 @@ final class summary_manager {
         return $summary;
     }
 
+    /**
+     * Method snapshot.
+     *
+     * @param \stdClass $activity Parameter activity.
+     * @param int $userid Parameter userid.
+     * @param int $sessionid Parameter sessionid.
+     * @param array $deltas Parameter deltas.
+     * @param int $now Parameter now.
+     * @return void Return value.
+     */
     public static function snapshot(
         \stdClass $activity,
         int $userid,

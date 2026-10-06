@@ -1,13 +1,47 @@
 <?php
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+/**
+ * question_repository.php
+ *
+ * @package   mod_masterypractice
+ * @copyright 2026 Eduardo Kraus {@link https://eduardokraus.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
 namespace mod_masterypractice\local;
 
 defined('MOODLE_INTERNAL') || die();
 
 use core_question\local\bank\question_version_status;
 
+/**
+ * Class question_repository.
+ */
 final class question_repository {
     private const WINDOW_SIZE = 250;
 
+    /**
+     * Method candidates.
+     *
+     * @param \stdClass $activity Parameter activity.
+     * @param int $userid Parameter userid.
+     * @param int $now Parameter now.
+     * @return array Return value.
+     */
     public static function candidates(\stdClass $activity, int $userid, int $now): array {
         global $DB;
 
@@ -62,6 +96,15 @@ final class question_repository {
         return $pool;
     }
 
+    /**
+     * Method concept_window.
+     *
+     * @param \stdClass $activity Parameter activity.
+     * @param \stdClass $concept Parameter concept.
+     * @param int $userid Parameter userid.
+     * @param int $now Parameter now.
+     * @return array Return value.
+     */
     private static function concept_window(
         \stdClass $activity,
         \stdClass $concept,
@@ -143,6 +186,12 @@ final class question_repository {
         ));
     }
 
+    /**
+     * Method latest_by_entries.
+     *
+     * @param array $entryids Parameter entryids.
+     * @return array Return value.
+     */
     private static function latest_by_entries(array $entryids): array {
         global $DB;
 
