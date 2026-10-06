@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\local;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class summary_manager.

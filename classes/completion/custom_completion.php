@@ -26,8 +26,6 @@ declare(strict_types=1);
 
 namespace mod_masterypractice\completion;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core_completion\activity_custom_completion;
 
 /**

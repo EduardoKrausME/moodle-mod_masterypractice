@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\local\mastery\difficulty_estimator;
 
 /**

@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local\scheduler;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * SM-2 adapted to Moodle fractions.
  *

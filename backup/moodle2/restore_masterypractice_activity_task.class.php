@@ -23,7 +23,6 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
 require_once($CFG->dirroot . '/mod/masterypractice/backup/moodle2/restore_masterypractice_stepslib.php');
 
 /**

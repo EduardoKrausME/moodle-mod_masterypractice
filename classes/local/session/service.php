@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local\session;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\local\limits;
 use mod_masterypractice\local\mastery\state_manager;
 use mod_masterypractice\local\selection\question_selector;

@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core_question\local\bank\question_version_status;
 
 /**

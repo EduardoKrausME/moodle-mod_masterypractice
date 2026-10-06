@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\event;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class mastery_level_reached.

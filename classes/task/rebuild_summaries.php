@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\task;
-defined('MOODLE_INTERNAL') || die();
 
 use mod_masterypractice\local\class_summary_manager;
 

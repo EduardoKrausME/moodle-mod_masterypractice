@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\local\mastery;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class difficulty_estimator.

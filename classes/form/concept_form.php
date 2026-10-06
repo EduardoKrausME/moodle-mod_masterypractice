@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\form;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\local\concept_repository;
 
 require_once($CFG->libdir . '/formslib.php');

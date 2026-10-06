@@ -33,10 +33,10 @@
         </div>
         <div class="mt-2 mt-md-0">
             {{#inprogressurl}}
-                <a class="btn btn-primary" href="{{inprogressurl}}">{{#str}}continuesession, masterypractice{{/str}}</a>
+                <a class="btn btn-primary" href="{{{inprogressurl}}}">{{#str}}continuesession, masterypractice{{/str}}</a>
             {{/inprogressurl}}
             {{^inprogressurl}}
-                <a class="btn btn-primary" href="{{starturl}}">{{#str}}startpractice, masterypractice{{/str}}</a>
+                <a class="btn btn-primary" href="{{{starturl}}}">{{#str}}startpractice, masterypractice{{/str}}</a>
             {{/inprogressurl}}
         </div>
     </div>

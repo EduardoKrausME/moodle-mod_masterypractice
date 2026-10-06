@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Resolves activity limits against the site's current administrative caps.
  */

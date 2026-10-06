@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\local\completion;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class evaluator.

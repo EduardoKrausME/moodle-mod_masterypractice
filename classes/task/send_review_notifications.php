@@ -23,7 +23,6 @@
  */
 
 namespace mod_masterypractice\task;
-defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class send_review_notifications.

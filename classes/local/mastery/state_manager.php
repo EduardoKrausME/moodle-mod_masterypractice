@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice\local\mastery;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\local\concept_repository;
 use mod_masterypractice\local\limits;
 use mod_masterypractice\local\scheduler\factory;
