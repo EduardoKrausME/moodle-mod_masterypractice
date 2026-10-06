@@ -12,9 +12,9 @@ defined('MOODLE_INTERNAL') || die();
  * Indicates which features are supported.
  *
  * @param string $feature Feature constant.
- * @return bool|null
+ * @return mixed
  */
-function masterypractice_supports(string $feature): ?bool {
+function masterypractice_supports(string $feature) {
     return match ($feature) {
         FEATURE_MOD_ARCHETYPE => MOD_ARCHETYPE_OTHER,
         FEATURE_GROUPS,
