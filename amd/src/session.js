@@ -3,69 +3,86 @@
 // Tracks active time per question as an auxiliary learning signal.
 // It is not used to grade the learner.
 
-export const init = () => {
-    const form = document.querySelector('.masterypractice-session');
-    if (!form) {
-        return;
-    }
-
-    const totals = new Map();
-    let activeSlot = null;
-    let activeSince = null;
-
-    const flush = () => {
-        if (activeSlot === null || activeSince === null) {
+define([], function() {
+    const init = function() {
+        const form = document.querySelector('.masterypractice-session');
+        if (!form) {
             return;
         }
-        const elapsed = Math.max(0, performance.now() - activeSince);
-        totals.set(activeSlot, (totals.get(activeSlot) || 0) + elapsed);
-        activeSince = performance.now();
-    };
 
-    const activate = (wrapper) => {
-        const slot = wrapper?.dataset.masterySlot;
-        if (!slot || slot === activeSlot) {
-            return;
-        }
-        flush();
-        activeSlot = slot;
-        activeSince = performance.now();
-    };
+        const totals = new Map();
+        let activeSlot = null;
+        let activeSince = null;
 
-    form.addEventListener('focusin', (event) => {
-        activate(event.target.closest('.masterypractice-question'));
-    });
+        const flush = function() {
+            if (activeSlot === null || activeSince === null) {
+                return;
+            }
 
-    form.addEventListener('pointerdown', (event) => {
-        activate(event.target.closest('.masterypractice-question'));
-    });
-
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            flush();
-            activeSince = null;
-        } else if (activeSlot !== null) {
+            const elapsed = Math.max(0, performance.now() - activeSince);
+            totals.set(activeSlot, (totals.get(activeSlot) || 0) + elapsed);
             activeSince = performance.now();
-        }
-    });
+        };
 
-    form.addEventListener('submit', () => {
-        flush();
-        form.querySelectorAll('input[data-mastery-time]').forEach((element) => element.remove());
+        const activate = function(wrapper) {
+            if (!wrapper) {
+                return;
+            }
 
-        form.querySelectorAll('.masterypractice-question[data-mastery-slot]').forEach((wrapper) => {
             const slot = wrapper.dataset.masterySlot;
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `masterytime[${slot}]`;
-            input.value = Math.max(0, Math.round((totals.get(slot) || 0) / 1000));
-            input.dataset.masteryTime = '1';
-            form.appendChild(input);
+            if (!slot || slot === activeSlot) {
+                return;
+            }
+
+            flush();
+            activeSlot = slot;
+            activeSince = performance.now();
+        };
+
+        form.addEventListener('focusin', function(event) {
+            activate(event.target.closest('.masterypractice-question'));
         });
 
-        const button = form.querySelector('button[type="submit"]');
-        if (button) {
-            button.disabled = true;
-        }
-    });
-};
+        form.addEventListener('pointerdown', function(event) {
+            activate(event.target.closest('.masterypractice-question'));
+        });
+
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                flush();
+                activeSince = null;
+            } else if (activeSlot !== null) {
+                activeSince = performance.now();
+            }
+        });
+
+        form.addEventListener('submit', function() {
+            flush();
+
+            form.querySelectorAll('input[data-mastery-time]').forEach(function(element) {
+                element.remove();
+            });
+
+            form.querySelectorAll('.masterypractice-question[data-mastery-slot]').forEach(function(wrapper) {
+                const slot = wrapper.dataset.masterySlot;
+                const input = document.createElement('input');
+
+                input.type = 'hidden';
+                input.name = 'masterytime[' + slot + ']';
+                input.value = Math.max(0, Math.round((totals.get(slot) || 0) / 1000));
+                input.dataset.masteryTime = '1';
+
+                form.appendChild(input);
+            });
+
+            const button = form.querySelector('button[type="submit"]');
+            if (button) {
+                button.disabled = true;
+            }
+        });
+    };
+
+    return {
+        init: init,
+    };
+});
