@@ -62,6 +62,7 @@ final class state_manager {
         if (!$qstate) {
             $qstate = self::new_question_state($activity, $userid, $sessionquestion, $now);
         }
+        $firstdifficultyobservation = (int) $qstate->reviewcount === 0;
 
         $states = [];
         foreach ($concepts as $concept) {
@@ -171,12 +172,14 @@ final class state_manager {
             }
         }
 
-        self::update_question_statistics(
-            (int) $activity->id,
-            (int) $sessionquestion->entryid,
-            $fraction,
-            $now
-        );
+        if ($firstdifficultyobservation) {
+            self::update_question_statistics(
+                (int) $activity->id,
+                (int) $sessionquestion->entryid,
+                $fraction,
+                $now
+            );
+        }
 
         return $deltas;
     }
