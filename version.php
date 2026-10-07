@@ -28,4 +28,4 @@ $plugin->component = 'mod_masterypractice';
 $plugin->version = 2026100600;
 $plugin->release = '1.0.0';
 $plugin->requires = 2024100700;
-$plugin->maturity = MATURITY_ALPHA;
+$plugin->maturity = MATURITY_STABLE;
