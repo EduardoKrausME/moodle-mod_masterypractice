@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\scheduler\adaptive_mastery_scheduler;
 use mod_masterypractice\scheduler\factory;
 use mod_masterypractice\scheduler\leitner_scheduler;

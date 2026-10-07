@@ -24,8 +24,6 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-// Este arquivo faz parte do Moodle - http://moodle.org/
-
 $string['addconcept'] = 'Adicionar conceito';
 $string['adminmaxdailyreviews'] = 'Máximo administrativo de revisões diárias';
 $string['adminmaxdailyreviews_desc'] = 'Máximo de revisões de questões que uma atividade pode permitir por aluno por dia.';

@@ -24,8 +24,6 @@
 
 namespace mod_masterypractice;
 
-defined('MOODLE_INTERNAL') || die();
-
 use mod_masterypractice\mastery\decay;
 use mod_masterypractice\mastery\difficulty_estimator;
 
