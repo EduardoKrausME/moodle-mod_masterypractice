@@ -150,7 +150,13 @@ final class provider implements
         }
 
         $params = ['activityid' => $activityid];
-        foreach (['masterypractice_cstate', 'masterypractice_qstate', 'masterypractice_sessions', 'masterypractice_usummary'] as $table) {
+        $tables = [
+            'masterypractice_cstate',
+            'masterypractice_qstate',
+            'masterypractice_sessions',
+            'masterypractice_usummary',
+        ];
+        foreach ($tables as $table) {
             $sql = "SELECT userid FROM {{$table}} WHERE masterypracticeid = :activityid";
             $userlist->add_from_sql('userid', $sql, $params);
         }

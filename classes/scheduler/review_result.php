@@ -29,6 +29,41 @@ namespace mod_masterypractice\scheduler;
  */
 final class review_result {
     /**
+     * Next review timestamp.
+     *
+     * @var int
+     */
+    public readonly int $nextreview;
+
+    /**
+     * Review interval in seconds.
+     *
+     * @var int
+     */
+    public readonly int $interval;
+
+    /**
+     * Mastery delta produced by the review.
+     *
+     * @var float
+     */
+    public readonly float $masterydelta;
+
+    /**
+     * Confidence delta produced by the review.
+     *
+     * @var float
+     */
+    public readonly float $confidencedelta;
+
+    /**
+     * Scheduler-specific item fields.
+     *
+     * @var array
+     */
+    public readonly array $itemfields;
+
+    /**
      * Method __construct.
      *
      * @param int $nextreview Parameter nextreview.
@@ -38,11 +73,16 @@ final class review_result {
      * @param array $itemfields Parameter itemfields.
      */
     public function __construct(
-        public readonly int $nextreview,
-        public readonly int $interval,
-        public readonly float $masterydelta,
-        public readonly float $confidencedelta,
-        public readonly array $itemfields = [],
+        int $nextreview,
+        int $interval,
+        float $masterydelta,
+        float $confidencedelta,
+        array $itemfields = [],
     ) {
+        $this->nextreview = $nextreview;
+        $this->interval = $interval;
+        $this->masterydelta = $masterydelta;
+        $this->confidencedelta = $confidencedelta;
+        $this->itemfields = $itemfields;
     }
 }

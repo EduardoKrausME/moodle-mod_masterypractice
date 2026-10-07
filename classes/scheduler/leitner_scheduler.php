@@ -28,6 +28,9 @@ namespace mod_masterypractice\scheduler;
  * Class leitner_scheduler.
  */
 final class leitner_scheduler extends abstract_scheduler {
+    /**
+     * Review intervals for the Leitner boxes.
+     */
     private const BOX_INTERVALS = [
         DAYSECS,
         3 * DAYSECS,

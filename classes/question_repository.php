@@ -30,6 +30,9 @@ use core_question\local\bank\question_version_status;
  * Class question_repository.
  */
 final class question_repository {
+    /**
+     * Maximum number of questions loaded per concept window.
+     */
     private const WINDOW_SIZE = 250;
 
     /**

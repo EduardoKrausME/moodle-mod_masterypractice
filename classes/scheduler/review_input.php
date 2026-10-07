@@ -29,6 +29,83 @@ namespace mod_masterypractice\scheduler;
  */
 final class review_input {
     /**
+     * Question score fraction.
+     *
+     * @var float
+     */
+    public readonly float $fraction;
+
+    /**
+     * Question difficulty.
+     *
+     * @var float
+     */
+    public readonly float $difficulty;
+
+    /**
+     * Current timestamp.
+     *
+     * @var int
+     */
+    public readonly int $now;
+
+    /**
+     * Last review timestamp.
+     *
+     * @var int
+     */
+    public readonly int $lastreview;
+
+    /**
+     * Minimum review interval.
+     *
+     * @var int
+     */
+    public readonly int $mininterval;
+
+    /**
+     * Maximum review interval.
+     *
+     * @var int
+     */
+    public readonly int $maxinterval;
+
+    /**
+     * Current mastery value.
+     *
+     * @var float
+     */
+    public readonly float $mastery;
+
+    /**
+     * Current confidence value.
+     *
+     * @var float
+     */
+    public readonly float $confidence;
+
+    /**
+     * Current success streak.
+     *
+     * @var int
+     */
+    public readonly int $successstreak;
+
+    /**
+     * Current failure streak.
+     *
+     * @var int
+     */
+    public readonly int $failurestreak;
+
+    /**
+     * Scheduler-specific item state.
+     *
+     * @var ?\stdClass
+     */
+    public readonly ?\stdClass $itemstate;
+
+    /**
      * Method __construct.
      *
      * @param float $fraction Parameter fraction.
@@ -44,18 +121,29 @@ final class review_input {
      * @param ?\stdClass $itemstate Parameter itemstate.
      */
     public function __construct(
-        public readonly float $fraction,
-        public readonly float $difficulty,
-        public readonly int $now,
-        public readonly int $lastreview,
-        public readonly int $mininterval,
-        public readonly int $maxinterval,
-        public readonly float $mastery,
-        public readonly float $confidence,
-        public readonly int $successstreak,
-        public readonly int $failurestreak,
-        public readonly ?\stdClass $itemstate = null,
+        float $fraction,
+        float $difficulty,
+        int $now,
+        int $lastreview,
+        int $mininterval,
+        int $maxinterval,
+        float $mastery,
+        float $confidence,
+        int $successstreak,
+        int $failurestreak,
+        ?\stdClass $itemstate = null,
     ) {
+        $this->fraction = $fraction;
+        $this->difficulty = $difficulty;
+        $this->now = $now;
+        $this->lastreview = $lastreview;
+        $this->mininterval = $mininterval;
+        $this->maxinterval = $maxinterval;
+        $this->mastery = $mastery;
+        $this->confidence = $confidence;
+        $this->successstreak = $successstreak;
+        $this->failurestreak = $failurestreak;
+        $this->itemstate = $itemstate;
     }
 
     /**
