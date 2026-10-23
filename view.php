@@ -38,7 +38,7 @@ $PAGE->set_title(format_string($activity->name));
 $PAGE->set_heading(format_string($course->fullname));
 $PAGE->set_context($context);
 
-masterypractice_view($activity, $course, $cm);
+masterypractice_view($activity, $course, $cm, $context);
 
 echo $OUTPUT->header();
 

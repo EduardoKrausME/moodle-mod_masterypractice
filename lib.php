@@ -107,15 +107,25 @@ function masterypractice_delete_instance(int $id): bool {
 }
 
 /**
- * Marks the activity as viewed.
+ * Records an activity view and updates view-based completion.
  *
  * @param stdClass $activity Activity record.
  * @param stdClass $course Course record.
  * @param cm_info|stdClass $cm Course module.
- * @param stdClass|null $context Unused compatibility parameter.
+ * @param context_module|null $context Module context.
  * @return void
  */
-function masterypractice_view(stdClass $activity, stdClass $course, $cm, ?stdClass $context = null): void {
+function masterypractice_view(stdClass $activity, stdClass $course, $cm, ?context_module $context = null): void {
+    $context ??= context_module::instance($cm->id);
+    $event = \mod_masterypractice\event\course_module_viewed::create([
+        "context" => $context,
+        "objectid" => $activity->id,
+    ]);
+    $event->add_record_snapshot("course_modules", $cm);
+    $event->add_record_snapshot("course", $course);
+    $event->add_record_snapshot("masterypractice", $activity);
+    $event->trigger();
+
     $completion = new completion_info($course);
     $completion->set_module_viewed($cm);
 }

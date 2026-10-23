@@ -109,3 +109,7 @@ Completion uses persisted achieved mastery, while dashboards may continue showin
 The plugin persists compact per-user/per-concept state and per-user/per-question scheduling state. Session answers remain owned by the Moodle Question Engine. Summary tables support teacher dashboards, and indexed due dates avoid scanning full response history when deciding what should be reviewed next.
 
 Course reset removes sessions, mastery, scheduling and learner summaries while retaining activity/concept configuration. Privacy API support exports and deletes the plugin's learner data and also removes owned Question Engine usages. Backup/restore copies the activity and concept configuration, but deliberately does not copy learner mastery, schedules, Practice Sessions or Question Engine usages. A duplicated/restored activity therefore starts with clean learner evidence while preserving its learning design.
+
+## Bugs and support
+
+Report reproducible defects or request improvements in the public [GitHub issue tracker](https://github.com/EduardoKrausME/moodle-mod_masterypractice/issues). The tracker is open for reports and discussions; please include the Moodle version and steps to reproduce the problem.
