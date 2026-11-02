@@ -2,6 +2,14 @@
 
 This changelog documents only the two most recent published GitHub releases. Each entry is based on the changes between its release tag and the immediately preceding published release. Changes made later on `master` are excluded.
 
+## 1.0.3 - 2026-11-01
+
+- Fixed course-module view event logging in Mastery Practice.
+- Added a test data generator for activity creation and expanded event regression tests.
+- Adjusted Moodle internal guards and rebuilt the session AMD asset.
+
+**Full comparison:** [1.0.2...1.0.3](https://github.com/EduardoKrausME/moodle-mod_masterypractice/compare/1.0.2...1.0.3)
+
 ## 1.0.2 - 2026-10-15
 
 ### Changed
